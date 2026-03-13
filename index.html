@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hadiah Spesial!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* ========================================= */
         /* IMPORT FONT POPPINS DARI GOOGLE FONTS */
@@ -253,7 +255,7 @@
 
     <div id="page-rejection" class="page">
         <img src="kucing 2.gif" alt="Kucing Sedih" style="width: 120px; margin-bottom: 10px;">
-        <h1>i promise u will like it 🥺</h1>
+        <h1>i promise u will like it <i class="fa-regular fa-face-frown-open"></i></h1>
         <br>
         <button onclick="goToPage('page1')">Return</button>
     </div>
@@ -321,13 +323,13 @@
                 <div class="bubble right">Sama kaya kamu</div>
                 <div class="bubble left">Hehehe</div>
             </div>
-            <div class="flower-card"><img src="bunga.jpeg" alt="Flower" class="flower-img"><p>For you 🌸</p></div>
+            <div class="flower-card"><img src="bunga.jpeg" alt="Flower" class="flower-img"><p>For you <i class="fa-solid fa-spa" style="color:#ffb8b8;"></i></p></div>
             <div class="chat-column">
                 <div class="bubble right">Semoga harimu...</div>
                 <div class="bubble left">Selalu...</div>
                 <div class="bubble right">Menyenangkan!</div>
                 <div class="bubble left">Semangat terus!</div>
-                <div class="bubble right">✨✨✨</div>
+                <div class="bubble right"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
             </div>
         </div>
         <button onclick="goToPage('page2')">Return</button>
@@ -346,7 +348,7 @@
     </div>
 
     <div id="card4-page" class="page">
-        <h2>A Letter for You 💌</h2>
+        <h2>A Letter for You <i class="fa-solid fa-envelope-open-text" style="color:#ff6b81;"></i></h2>
         <div class="letter-wrapper">
             <div class="washi-tape"></div>
             <div class="letter-paper">
@@ -374,7 +376,7 @@ Luqman
     </div>
 
     <div id="coupon-selection-page" class="page">
-        <h1 style="margin-bottom: 5px;">Love Coupons 🎟️</h1>
+        <h1 style="margin-bottom: 5px;">Love Coupons <i class="fa-solid fa-ticket" style="color:#ff4757;"></i></h1>
         <p style="color: #747d8c; margin-bottom: 30px;">Pilih tiket yang mau kamu klaim hari ini! Bisa pilih lebih dari satu lho.</p>
         
         <div class="coupon-container" id="selection-container">
@@ -418,21 +420,21 @@ Luqman
     </div>
 
     <div id="redemption-page" class="page">
-        <h1 style="margin-bottom: 5px;">Waktunya Eksekusi! 🚀</h1>
+        <h1 style="margin-bottom: 5px;">Waktunya Eksekusi! <i class="fa-solid fa-rocket" style="color:#eccc68;"></i></h1>
         <p style="color: #747d8c; margin-bottom: 30px;">Klik tiketnya kalau kita udah nyelesaiin kegiatannya ya!</p>
         
         <div class="coupon-container" id="redeem-container"></div>
 
         <div style="margin-top: 40px; text-align: center;">
-            <p id="redeem-msg" style="color: #ff6b81; font-weight: bold;">Robek (klik) semua tiket di atas dulu buat lanjut! 👀</p>
+            <p id="redeem-msg" style="color: #ff6b81; font-weight: bold;">Robek (klik) semua tiket di atas dulu buat lanjut! <i class="fa-solid fa-eye"></i></p>
             
-            <button id="btn-finish" style="display: none;" onclick="goToPage('reward-page')">Lanjut Buka Kejutan! 🎁</button>
+            <button id="btn-finish" style="display: none;" onclick="goToPage('reward-page')">Lanjut Buka Kejutan! <i class="fa-solid fa-gift"></i></button>
         </div>
     </div>
 
     <div id="reward-page" class="page">
         <img src="gif kucing.gif" alt="Surprise" style="width: 120px; margin-bottom: 10px;">
-        <h1 style="margin-bottom: 5px;">Kejutan Tambahan! 🎁</h1>
+        <h1 style="margin-bottom: 5px;">Kejutan Tambahan! <i class="fa-solid fa-gift" style="color:#ff6b81;"></i></h1>
         <p style="color: #747d8c; margin-bottom: 30px;">Karena kamu udah nyelesaiin tiketnya...</p>
         
         <div id="reward-message" style="background: #fff0f5; border: 2px dashed #ffb8b8; padding: 25px; border-radius: 10px; margin-bottom: 30px; color: #b33939; font-size: 16px; line-height: 1.6; font-weight: bold;"></div>
@@ -441,7 +443,7 @@ Luqman
     </div>
 
     <div id="page-end" class="page">
-        <h1 style="font-size: 2.5em; margin-top: 50px;">makasih ya udah buka semua hadiahnyaaa 🎉</h1>
+        <h1 style="font-size: 2.5em; margin-top: 50px;">makasih ya udah buka semua hadiahnyaaa <i class="fa-solid fa-champagne-glasses" style="color:#eccc68;"></i></h1>
         <br>
         <button class="btn-outline" onclick="goToPage('page2')">Kembali ke Menu</button>
     </div>
@@ -469,7 +471,7 @@ Luqman
         selectedCount = selectedCoupons.length; 
         
         if (selectedCount === 0) {
-            alert('Pilih minimal satu tiket dulu dong buat diklaim! 🥺');
+            alert('Pilih minimal satu tiket dulu dong buat diklaim! (T_T)');
             return;
         }
 
@@ -501,7 +503,8 @@ Luqman
 
                     let stamp = document.createElement('div');
                     stamp.className = 'claimed-stamp';
-                    stamp.innerText = 'TERKLAIM ✅';
+                    // Teks stempel dirubah pakai icon FontAwesome
+                    stamp.innerHTML = 'TERKLAIM <i class="fa-solid fa-circle-check"></i>';
 
                     // Masukkan potongan terbang dan stempel ke tiket utama
                     this.appendChild(leftPart);
@@ -534,13 +537,13 @@ Luqman
             // Siapkan teks di halaman Reward
             const rewardEl = document.getElementById('reward-message');
             if (selectedCount === 1) {
-                rewardEl.innerHTML = "Wah ambil 1 doang nih? Tumben ga maruk wkwk.<br><br>Yaudah dapet bonus <b>1x peluk ekstra</b> deh! 🤗";
+                rewardEl.innerHTML = "Wah ambil 1 doang nih? Tumben ga maruk wkwk.<br><br>Yaudah dapet bonus <b>1x peluk ekstra</b> deh! <i class='fa-regular fa-face-smile-beam'></i>";
             } else if (selectedCount === 2) {
-                rewardEl.innerHTML = "Pilih 2 pas banget buat habisin weekend bareng!<br><br>Bonusnya dapet <b>traktiran makanan kesukaanmu!</b> 🍔";
+                rewardEl.innerHTML = "Pilih 2 pas banget buat habisin weekend bareng!<br><br>Bonusnya dapet <b>traktiran makanan kesukaanmu!</b> <i class='fa-solid fa-burger'></i>";
             } else if (selectedCount === 3) {
-                rewardEl.innerHTML = "Wuih borong 3 tiket! Siap-siap aku capek nemenin kamu seharian yaa 😂.<br><br>Bonusnya aku bakal <b>nurutin 1 permintaan bebas</b> kamu!";
+                rewardEl.innerHTML = "Wuih borong 3 tiket! Siap-siap aku capek nemenin kamu seharian yaa <i class='fa-solid fa-face-laugh-squint'></i>.<br><br>Bonusnya aku bakal <b>nurutin 1 permintaan bebas</b> kamu!";
             } else if (selectedCount === 4) {
-                rewardEl.innerHTML = "MARUK ALERT 🚨! Diborong semua dong ahaha.<br><br>Gapapa khusus buat kamu, dapet VIP Pass: <b>Bebas manja seharian full!</b> ❤️";
+                rewardEl.innerHTML = "MARUK ALERT <i class='fa-solid fa-triangle-exclamation' style='color:red;'></i>! Diborong semua dong ahaha.<br><br>Gapapa khusus buat kamu, dapet VIP Pass: <b>Bebas manja seharian full!</b> <i class='fa-solid fa-heart' style='color:#ff4757;'></i>";
             }
         }
     }
