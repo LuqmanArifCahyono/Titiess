@@ -71,98 +71,31 @@
         /* ========================================= */
         /* CSS MENU UTAMA (HALAMAN 2) */
         /* ========================================= */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(2, 220px); 
-            justify-content: center; 
-            gap: 30px; 
-            margin-top: 30px;
-        }
-        .card {
-            background: #fff0f5;
-            padding: 0;
-            border-radius: 15px;
-            border: 2px dashed #ffb8b8;
-            cursor: pointer;
-            transition: 0.3s;
-            overflow: hidden;
-            aspect-ratio: 1 / 1; 
-            position: relative;
-        }
-        .card:hover { 
-            transform: translateY(-5px); 
-            border-color: #ff6b81; 
-            box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4); 
-            z-index: 10;
-        }
-        .card-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
+        .grid-container { display: grid; grid-template-columns: repeat(2, 220px); justify-content: center; gap: 30px; margin-top: 30px; }
+        .card { background: #fff0f5; padding: 0; border-radius: 15px; border: 2px dashed #ffb8b8; cursor: pointer; transition: 0.3s; overflow: hidden; aspect-ratio: 1 / 1; position: relative; }
+        .card:hover { transform: translateY(-5px); border-color: #ff6b81; box-shadow: 0 5px 15px rgba(255, 107, 129, 0.4); z-index: 10; }
+        .card-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
         /* ========================================= */
         /* CSS KOLASE FOTO (MEMORIES) */
         /* ========================================= */
-        .collage-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 20px;
-            margin: 30px 0;
-            position: relative;
-        }
-        .collage-column {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            position: relative;
-        }
+        .collage-container { display: flex; justify-content: center; align-items: flex-start; gap: 20px; margin: 30px 0; position: relative; }
+        .collage-column { display: flex; flex-direction: column; gap: 10px; position: relative; }
         .left-collage, .right-collage { width: 30%; padding-top: 40px; }
-        .center-strips {
-            width: 35%;
-            flex-direction: row;
-            gap: 20px;
-            justify-content: center;
-        }
+        .center-strips { width: 35%; flex-direction: row; gap: 20px; justify-content: center; }
 
         .polaroid-frame {
-            background-color: white;
-            border: 10px solid #800000;
-            border-bottom-width: 30px;
-            border-radius: 5px;
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
-            display: inline-block;
-            position: relative;
-            cursor: grab;
-            opacity: 0; 
-            transition: box-shadow 0.3s ease; 
-            touch-action: none; 
+            background-color: white; border: 10px solid #800000; border-bottom-width: 30px; border-radius: 5px;
+            box-shadow: 2px 4px 10px rgba(0,0,0,0.3); display: inline-block; position: relative; cursor: grab; opacity: 0; transition: box-shadow 0.3s ease; touch-action: none; 
         }
         .polaroid-frame:active { cursor: grabbing; }
         .polaroid-img { width: 100%; display: block; border-radius: 3px; pointer-events: none; }
-
         .page.active .polaroid-frame { animation: fadeInDrop 0.6s ease-out forwards; }
-        @keyframes fadeInDrop {
-            0% { opacity: 0; transform: translateY(-30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInDrop { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: translateY(0); } }
 
-        .photobooth-strip {
-            background-color: white;
-            padding: 10px;
-            border-radius: 3px;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            width: 130px;
-            z-index: 5;
-        }
+        .photobooth-strip { background-color: white; padding: 10px; border-radius: 3px; box-shadow: 2px 2px 8px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 5px; width: 130px; z-index: 5; }
         .strip-photo { width: 100%; height: 110px; object-fit: cover; border: 1px solid #ddd; border-radius: 2px; }
 
-        /* Tumpukan Desktop */
         .frame1 { transform: rotate(-8deg); z-index: 10; animation-delay: 0.1s !important; }
         .frame2 { transform: rotate(5deg) translateY(-40px) translateX(15px); z-index: 11; animation-delay: 0.3s !important; }
         .frame3 { transform: rotate(-4deg) translateY(-85px) translateX(-10px); z-index: 12; animation-delay: 0.5s !important; }
@@ -178,71 +111,102 @@
         .bubble { background: #f1f2f6; padding: 10px 15px; border-radius: 15px; font-size: 13px; line-height: 1.4; }
         .bubble.left { align-self: flex-start; background: #eccc68; border-bottom-left-radius: 0; }
         .bubble.right { align-self: flex-end; background: #7bed9f; border-bottom-right-radius: 0; }
-        
-        .flower-card { 
-            background-color: white;
-            border: 10px solid #800000; 
-            border-bottom-width: 40px; 
-            border-radius: 5px;
-            box-shadow: 2px 4px 10px rgba(0,0,0,0.3);
-            width: 40%;
-            position: relative; 
-            transform: rotate(-2deg); 
-        }
-        
+        .flower-card { background-color: white; border: 10px solid #800000; border-bottom-width: 40px; border-radius: 5px; box-shadow: 2px 4px 10px rgba(0,0,0,0.3); width: 40%; position: relative; transform: rotate(-2deg); }
         .flower-img { width: 100%; display: block; border-radius: 3px; }
-
-        .flower-card p {
-            position: absolute;
-            bottom: -30px; 
-            left: 0;
-            right: 0;
-            margin: 0;
-            color: white; 
-            font-weight: 600;
-            font-size: 14px;
-            text-align: center;
-        }
+        .flower-card p { position: absolute; bottom: -30px; left: 0; right: 0; margin: 0; color: white; font-weight: 600; font-size: 14px; text-align: center; }
 
         /* ========================================= */
         /* CSS SURAT ESTETIK (CARD 4) */
         /* ========================================= */
-        .letter-wrapper {
-            position: relative;
-            max-width: 500px;
-            margin: 40px auto 20px auto;
-            transform: rotate(1deg); 
-            transition: transform 0.3s ease;
-        }
+        .letter-wrapper { position: relative; max-width: 500px; margin: 40px auto 20px auto; transform: rotate(1deg); transition: transform 0.3s ease; }
         .letter-wrapper:hover { transform: rotate(0deg) scale(1.02); }
+        .washi-tape { position: absolute; top: -15px; left: 50%; transform: translateX(-50%) rotate(-3deg); width: 130px; height: 35px; background-color: rgba(255, 107, 129, 0.4); border-left: 2px dashed rgba(255, 107, 129, 0.8); border-right: 2px dashed rgba(255, 107, 129, 0.8); box-shadow: 0 1px 3px rgba(0,0,0,0.1); z-index: 2; }
+        .letter-paper { background-color: #fffaf0; background-image: repeating-linear-gradient(transparent, transparent 28px, #ffb8b8 28px, #ffb8b8 29px); padding: 45px 30px 30px 30px; border-radius: 3px; box-shadow: 2px 5px 15px rgba(0,0,0,0.15); text-align: left; font-family: 'Poppins', sans-serif; font-size: 14px; line-height: 29px; color: #2c3e50; position: relative; white-space: pre-wrap; }
 
-        .washi-tape {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-3deg);
-            width: 130px;
-            height: 35px;
-            background-color: rgba(255, 107, 129, 0.4); 
-            border-left: 2px dashed rgba(255, 107, 129, 0.8);
-            border-right: 2px dashed rgba(255, 107, 129, 0.8);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            z-index: 2;
+        /* ========================================= */
+        /* CSS LOVE COUPONS (DESAIN ORIGINAL) */
+        /* ========================================= */
+        .coupon-container { display: flex; flex-direction: column; gap: 20px; margin: 30px 0; align-items: center; overflow: visible; }
+        .coupon {
+            display: flex; background-color: #fce4e4; border-radius: 12px; width: 100%; max-width: 500px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08); border: 2px solid transparent; color: #b33939; 
+            position: relative; transition: all 0.3s ease; cursor: pointer; user-select: none;
+        }
+        .coupon:hover { transform: scale(1.03); }
+        .coupon.alt { background-color: #fadcdc; }
+        
+        .coupon.selected { background-color: #ffd6d6; border: 2px solid #ff4757; box-shadow: 0 8px 15px rgba(255, 71, 87, 0.3); transform: scale(1.05); }
+
+        .coupon-inner { display: flex; width: 100%; border: 2px solid #b33939; margin: 6px; border-radius: 8px; pointer-events: none; transition: opacity 0.3s; }
+        
+        .c-left { padding: 10px 5px; border-right: 2px dashed #b33939; display: flex; align-items: center; justify-content: center; }
+        .vertical-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; letter-spacing: 2px; font-weight: 600; color: #d15c5c; }
+        .c-mid { flex: 1; padding: 20px 10px; text-align: center; border-right: 2px dashed #b33939; display: flex; flex-direction: column; justify-content: center; }
+        .c-mid p { margin: 0; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        .c-mid h3 { margin: 5px 0; font-size: 26px; letter-spacing: 1px; color: #b33939; font-weight: 700; }
+        
+        .c-right { padding: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .barcode { width: 25px; height: 60px; background: repeating-linear-gradient(90deg, #b33939, #b33939 2px, transparent 2px, transparent 4px, #b33939 4px, #b33939 5px, transparent 5px, transparent 8px); }
+
+        /* ========================================= */
+        /* EFEK ANIMASI KEBELAH JADI 2 (TERBARU & FIX) */
+        /* ========================================= */
+        .coupon.redeemed {
+            background-color: #f1f2f6 !important; 
+            border-color: #dcdde1 !important;
+            box-shadow: none !important;
+            cursor: not-allowed;
+            overflow: visible !important;
+        }
+        
+        /* HANYA sembunyikan inner UTAMA yang asli, agar potongan belahannya tetap kelihatan */
+        .coupon.redeemed > .coupon-inner { opacity: 0 !important; }
+
+        /* Potongan Kiri melayang ke kiri */
+        .fly-left {
+            position: absolute !important; top: 0; left: 0; width: 100%; height: 100%;
+            -webkit-clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100%);
+            clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100%);
+            animation: tearLeft 0.8s forwards ease-in;
+            pointer-events: none; z-index: 10;
+            background-color: #fce4e4; border-radius: 12px; box-sizing: border-box;
+        }
+        .fly-left.alt { background-color: #fadcdc; }
+
+        /* Potongan Kanan melayang ke kanan */
+        .fly-right {
+            position: absolute !important; top: 0; left: 0; width: 100%; height: 100%;
+            -webkit-clip-path: polygon(55% 0, 100% 0, 100% 100%, 45% 100%);
+            clip-path: polygon(55% 0, 100% 0, 100% 100%, 45% 100%);
+            animation: tearRight 0.8s forwards ease-in;
+            pointer-events: none; z-index: 10;
+            background-color: #fce4e4; border-radius: 12px; box-sizing: border-box;
+        }
+        .fly-right.alt { background-color: #fadcdc; }
+
+        /* Pastikan isi dari potongan yang terbang tetap terlihat! */
+        .fly-left > .coupon-inner, .fly-right > .coupon-inner { opacity: 1 !important; }
+
+        @keyframes tearLeft {
+            0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+            100% { transform: translate(-60px, 80px) rotate(-15deg); opacity: 0; }
         }
 
-        .letter-paper {
-            background-color: #fffaf0;
-            background-image: repeating-linear-gradient(transparent, transparent 28px, #ffb8b8 28px, #ffb8b8 29px);
-            padding: 45px 30px 30px 30px;
-            border-radius: 3px;
-            box-shadow: 2px 5px 15px rgba(0,0,0,0.15);
-            text-align: left;
-            font-family: 'Poppins', sans-serif; 
-            font-size: 14px; 
-            line-height: 29px; 
-            color: #2c3e50; 
-            position: relative;
-            white-space: pre-wrap; 
+        @keyframes tearRight {
+            0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+            100% { transform: translate(60px, 80px) rotate(15deg); opacity: 0; }
+        }
+
+        /* Stempel 'Terklaim' yang tertinggal di bawahnya */
+        .claimed-stamp {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
+            font-size: 26px; font-weight: 800; color: #ff6b81; opacity: 0; z-index: 1; pointer-events: none;
+            letter-spacing: 2px;
+            animation: stampAppear 0.5s 0.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes stampAppear {
+            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
 
         /* ========================================= */
@@ -251,55 +215,26 @@
         @media (max-width: 768px) {
             .container { padding: 20px; }
             h1 { font-size: 1.8em; }
-            
-            .grid-container { 
-                grid-template-columns: repeat(2, 140px); 
-                justify-content: center;
-                gap: 15px; 
-            }
-
-            .collage-container {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
-            }
-            .left-collage, .right-collage, .center-strips {
-                width: 100%;
-                padding-top: 0;
-                align-items: center;
-            }
+            .grid-container { grid-template-columns: repeat(2, 140px); justify-content: center; gap: 15px; }
+            .collage-container { flex-direction: column; align-items: center; gap: 30px; }
+            .left-collage, .right-collage, .center-strips { width: 100%; padding-top: 0; align-items: center; }
             .polaroid-frame { max-width: 200px; }
-            
             .frame1 { transform: rotate(-5deg); margin-bottom: -50px; }
             .frame2 { transform: rotate(3deg); margin-bottom: -50px; }
             .frame3 { transform: rotate(-2deg); }
             .frame4 { transform: rotate(4deg); margin-bottom: -50px; }
             .frame5 { transform: rotate(-3deg); margin-bottom: -50px; }
             .frame6 { transform: rotate(2deg); }
-
-            /* PERBAIKAN VIRTUAL FLOWERS DI HP */
-            .flower-container { 
-                flex-direction: column; 
-                gap: 20px; 
-            }
-            .flower-card { 
-                width: 80%; 
-                max-width: 280px;
-                order: -1; /* Pindah ke paling atas! */
-                margin: 0 auto; 
-            }
-            .chat-column { 
-                width: 100%; 
-                align-items: stretch; /* Agar bubble tetap bisa ke kiri & kanan */
-                gap: 12px;
-            }
+            .flower-container { flex-direction: column; gap: 20px; }
+            .flower-card { width: 80%; max-width: 280px; order: -1; margin: 0 auto; }
+            .chat-column { width: 100%; align-items: stretch; gap: 12px; }
             .bubble.left { align-self: flex-start; text-align: left; }
             .bubble.right { align-self: flex-end; text-align: right; }
-
-            /* PERBAIKAN SURAT DI HP */
-            .letter-paper {
-                padding: 35px 20px 20px 20px; /* Padding dikecilkan sedikit di HP */
-            }
+            .letter-paper { padding: 35px 20px 20px 20px; }
+            .c-mid h3 { font-size: 20px; }
+            .c-mid p { font-size: 8px; }
+            .vertical-text { font-size: 9px; }
+            .barcode { width: 15px; }
         }
     </style>
 </head>
@@ -308,7 +243,6 @@
 <div class="container">
     <div id="page1" class="page active">
         <img src="gif kucing.gif" alt="Kucing Menyapa" style="width: 120px; margin-bottom: 10px;">
-        
         <h1>haloo titiess</h1>
         <h3>mau lihat hadiah kamu nggakk?</h3>
         <div style="margin-top: 30px;">
@@ -319,7 +253,6 @@
 
     <div id="page-rejection" class="page">
         <img src="kucing 2.gif" alt="Kucing Sedih" style="width: 120px; margin-bottom: 10px;">
-        
         <h1>i promise u will like it 🥺</h1>
         <br>
         <button onclick="goToPage('page1')">Return</button>
@@ -338,26 +271,12 @@
 
     <div id="card1-page" class="page">
         <h2>Captures Memories</h2>
-        <p> <br><small></small></p>
-        
+        <p>dan semua kenangan manis kita... hehe <br><small>(Coba geser-geser fotonya!)</small></p>
         <div class="collage-container">
             <div class="collage-column left-collage">
-                <div class="polaroid-frame frame1"><img src="fotbar bunga.jpeg" alt="Memory" class="polaroid-img"></div>
+                <div class="polaroid-frame frame1"><img src="cover-memories.jpg" alt="Memory" class="polaroid-img"></div>
                 <div class="polaroid-frame frame2"><img src="cover-memories.jpg" alt="Memory" class="polaroid-img"></div>
                 <div class="polaroid-frame frame3"><img src="cover-memories.jpg" alt="Memory" class="polaroid-img"></div>
-            </div>
-            
-            <div class="collage-column center-strips">
-                <div class="photobooth-strip">
-                    <img src="biliard.jpeg" alt="Strip 1" class="strip-photo">
-                    <img src="cover-memories.jpg" alt="Strip 2" class="strip-photo">
-                    <img src="cover-memories.jpg" alt="Strip 3" class="strip-photo">
-                </div>
-                <div class="photobooth-strip">
-                    <img src="cover-memories.jpg" alt="Strip 4" class="strip-photo">
-                    <img src="cover-memories.jpg" alt="Strip 5" class="strip-photo">
-                    <img src="cover-memories.jpg" alt="Strip 6" class="strip-photo">
-                </div>
             </div>
             <div class="collage-column center-strips">
                 <div class="photobooth-strip">
@@ -371,9 +290,8 @@
                     <img src="cover-memories.jpg" alt="Strip 6" class="strip-photo">
                 </div>
             </div>
-            
             <div class="collage-column right-collage">
-                <div class="polaroid-frame frame4"><img src="fotbar dwiwara.jpeg" alt="Memory" class="polaroid-img"></div>
+                <div class="polaroid-frame frame4"><img src="cover-memories.jpg" alt="Memory" class="polaroid-img"></div>
                 <div class="polaroid-frame frame5"><img src="cover-memories.jpg" alt="Memory" class="polaroid-img"></div>
                 <div class="polaroid-frame frame6"><img src="cover-memories.jpg" alt="Memory" class="polaroid-img"></div>
             </div>
@@ -391,10 +309,7 @@
                 <div class="bubble right">Sama kaya kamu</div>
                 <div class="bubble left">Hehehe</div>
             </div>
-            <div class="flower-card">
-                <img src="bunga.jpeg" alt="Flower" class="flower-img">
-                <p>For you 🌸</p>
-            </div>
+            <div class="flower-card"><img src="bunga.jpeg" alt="Flower" class="flower-img"><p>For you 🌸</p></div>
             <div class="chat-column">
                 <div class="bubble right">Semoga harimu...</div>
                 <div class="bubble left">Selalu...</div>
@@ -408,23 +323,18 @@
 
     <div id="card3-page" class="page">
         <h2>ini lagu yang bikin aku inget sama kamuu</h2>
-        
         <div style="margin: 30px auto; max-width: 300px; text-align: center;">
             <a href="https://youtu.be/iygXgP2nOF4?si=4LNdD9qsFbOHRo_F" target="_blank" style="text-decoration: none; color: inherit; display: block;">
-                
                 <img src="NIKI2.jpg" alt="Cover Lagu" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                
                 <h3 style="margin-top: 15px;">Take A Chance With Me - NIKI</h3>
                 <p style="font-size: 14px; color: #ff6b81; font-weight: bold;">(Fotonya bisa di pencet kokk)</p>
             </a>
         </div>
-        
         <button onclick="goToPage('page2')">Return</button>
     </div>
 
     <div id="card4-page" class="page">
         <h2>A Letter for You 💌</h2>
-        
         <div class="letter-wrapper">
             <div class="washi-tape"></div>
             <div class="letter-paper">
@@ -444,12 +354,78 @@ Yours Truly,
 Luqman
             </div>
         </div>
-        
         <div style="margin-top: 30px;">
             <p style="font-weight: bold; color: #ff6b81; margin-bottom: 15px;">udah dibaca semua hadiahnya?</p>
             <button class="btn-outline" onclick="goToPage('page2')">Return</button>
-            <button onclick="goToPage('page-end')">Next</button>
+            <button onclick="goToPage('coupon-selection-page')">Next</button>
         </div>
+    </div>
+
+    <div id="coupon-selection-page" class="page">
+        <h1 style="margin-bottom: 5px;">Love Coupons 🎟️</h1>
+        <p style="color: #747d8c; margin-bottom: 30px;">Pilih tiket yang mau kamu klaim hari ini! Bisa pilih lebih dari satu lho.</p>
+        
+        <div class="coupon-container" id="selection-container">
+            <div class="coupon" onclick="toggleCoupon(this)">
+                <div class="coupon-inner">
+                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
+                    <div class="c-mid"><p>GOOD FOR</p><h3>PICNIC DATE</h3><p>Grab a blanket</p></div>
+                    <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
+                </div>
+            </div>
+
+            <div class="coupon alt" onclick="toggleCoupon(this)">
+                <div class="coupon-inner">
+                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
+                    <div class="c-mid"><p>GOOD FOR</p><h3>ICE CREAM</h3><p>Where do you want to go?</p></div>
+                    <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
+                </div>
+            </div>
+
+            <div class="coupon" onclick="toggleCoupon(this)">
+                <div class="coupon-inner">
+                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
+                    <div class="c-mid"><p>GOOD FOR</p><h3>MOVIE NIGHT</h3><p>You pick the movie</p></div>
+                    <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
+                </div>
+            </div>
+
+            <div class="coupon alt" onclick="toggleCoupon(this)">
+                <div class="coupon-inner">
+                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
+                    <div class="c-mid"><p>GOOD FOR</p><h3>GAME NIGHT</h3><p>Anything you want to play</p></div>
+                    <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px;">
+            <button class="btn-outline" onclick="goToPage('card4-page')">Back to Letter</button>
+            <button onclick="submitCoupons()">Klaim Tiket!</button>
+        </div>
+    </div>
+
+    <div id="redemption-page" class="page">
+        <h1 style="margin-bottom: 5px;">Waktunya Eksekusi! 🚀</h1>
+        <p style="color: #747d8c; margin-bottom: 30px;">Klik tiketnya kalau kita udah nyelesaiin kegiatannya ya!</p>
+        
+        <div class="coupon-container" id="redeem-container"></div>
+
+        <div style="margin-top: 40px; text-align: center;">
+            <p id="redeem-msg" style="color: #ff6b81; font-weight: bold;">Robek (klik) semua tiket di atas dulu buat lanjut! 👀</p>
+            
+            <button id="btn-finish" style="display: none;" onclick="goToPage('reward-page')">Lanjut Buka Kejutan! 🎁</button>
+        </div>
+    </div>
+
+    <div id="reward-page" class="page">
+        <img src="gif kucing.gif" alt="Surprise" style="width: 120px; margin-bottom: 10px;">
+        <h1 style="margin-bottom: 5px;">Kejutan Tambahan! 🎁</h1>
+        <p style="color: #747d8c; margin-bottom: 30px;">Karena kamu udah nyelesaiin tiketnya...</p>
+        
+        <div id="reward-message" style="background: #fff0f5; border: 2px dashed #ffb8b8; padding: 25px; border-radius: 10px; margin-bottom: 30px; color: #b33939; font-size: 16px; line-height: 1.6; font-weight: bold;"></div>
+        
+        <button onclick="goToPage('page-end')">Terakhir Nih!</button>
     </div>
 
     <div id="page-end" class="page">
@@ -461,6 +437,7 @@ Luqman
 </div>
 
 <script>
+    // --- Lojik Pindah Halaman ---
     function goToPage(pageId) {
         let pages = document.querySelectorAll('.page');
         pages.forEach(page => page.classList.remove('active'));
@@ -468,70 +445,121 @@ Luqman
         window.scrollTo(0, 0); 
     }
 
+    let selectedCount = 0; 
+
+    // --- Lojik Kupon Interaktif ---
+    function toggleCoupon(element) {
+        element.classList.toggle('selected');
+    }
+
+    function submitCoupons() {
+        const selectedCoupons = document.querySelectorAll('#selection-container .coupon.selected');
+        selectedCount = selectedCoupons.length; 
+        
+        if (selectedCount === 0) {
+            alert('Pilih minimal satu tiket dulu dong buat diklaim! 🥺');
+            return;
+        }
+
+        const redeemContainer = document.getElementById('redeem-container');
+        redeemContainer.innerHTML = ''; 
+        
+        document.getElementById('btn-finish').style.display = 'none';
+        document.getElementById('redeem-msg').style.display = 'block';
+
+        selectedCoupons.forEach(coupon => {
+            let clone = coupon.cloneNode(true); 
+            clone.classList.remove('selected'); 
+            clone.removeAttribute('onclick');   
+            
+            // FUNGSI KETIKA TIKET DIKLIK DI HALAMAN EKSEKUSI (EFEK SOBEK FIX)
+            clone.onclick = function() {
+                if(!this.classList.contains('redeemed')) {
+                    
+                    let isAlt = this.classList.contains('alt');
+                    
+                    // Kita gunakan innerHTML dari clone ini untuk mengisi potongan kiri dan kanan
+                    let leftPart = document.createElement('div');
+                    leftPart.className = 'coupon fly-left' + (isAlt ? ' alt' : '');
+                    leftPart.innerHTML = this.innerHTML; 
+                    
+                    let rightPart = document.createElement('div');
+                    rightPart.className = 'coupon fly-right' + (isAlt ? ' alt' : '');
+                    rightPart.innerHTML = this.innerHTML; 
+
+                    let stamp = document.createElement('div');
+                    stamp.className = 'claimed-stamp';
+                    stamp.innerText = 'TERKLAIM ✅';
+
+                    // Masukkan potongan terbang dan stempel ke tiket utama
+                    this.appendChild(leftPart);
+                    this.appendChild(rightPart);
+                    this.appendChild(stamp);
+
+                    // Tandai tiket UTAMA sebagai selesai
+                    this.classList.add('redeemed'); 
+                    checkAllRedeemed(); 
+                }
+            };
+            
+            redeemContainer.appendChild(clone);
+        });
+
+        goToPage('redemption-page');
+    }
+
+    function checkAllRedeemed() {
+        // PERBAIKAN: Gunakan tanda '>' agar Javascript HANYA menghitung tiket yang ada di luar (tiket utama), 
+        // BUKAN tiket potongan yang baru saja kita gandakan di dalam untuk efek terbang.
+        const total = document.querySelectorAll('#redeem-container > .coupon').length;
+        const redeemed = document.querySelectorAll('#redeem-container > .coupon.redeemed').length;
+        
+        if(total > 0 && total === redeemed) {
+            // Tampilkan tombol Lanjut Buka Kejutan
+            document.getElementById('btn-finish').style.display = 'inline-block';
+            document.getElementById('redeem-msg').style.display = 'none';
+
+            // Siapkan teks di halaman Reward
+            const rewardEl = document.getElementById('reward-message');
+            if (selectedCount === 1) {
+                rewardEl.innerHTML = "Wah ambil 1 doang nih? Tumben ga maruk wkwk.<br><br>Yaudah dapet bonus <b>1x peluk ekstra</b> deh! 🤗";
+            } else if (selectedCount === 2) {
+                rewardEl.innerHTML = "Pilih 2 pas banget buat habisin weekend bareng!<br><br>Bonusnya dapet <b>traktiran makanan kesukaanmu!</b> 🍔";
+            } else if (selectedCount === 3) {
+                rewardEl.innerHTML = "Wuih borong 3 tiket! Siap-siap aku capek nemenin kamu seharian yaa 😂.<br><br>Bonusnya aku bakal <b>nurutin 1 permintaan bebas</b> kamu!";
+            } else if (selectedCount === 4) {
+                rewardEl.innerHTML = "MARUK ALERT 🚨! Diborong semua dong ahaha.<br><br>Gapapa khusus buat kamu, dapet VIP Pass: <b>Bebas manja seharian full!</b> ❤️";
+            }
+        }
+    }
+
+    // --- Lojik Drag & Drop Memories ---
     document.addEventListener('DOMContentLoaded', () => {
         const dragItems = document.querySelectorAll('.polaroid-frame');
         let highestZIndex = 50; 
-        
         dragItems.forEach(item => {
-            let isDragging = false;
-            let startX, startY, currentX = 0, currentY = 0;
-            let initialTransform = '';
-
-            item.addEventListener('mousedown', dragStart);
-            item.addEventListener('touchstart', dragStart, {passive: false});
-
+            let isDragging = false, startX, startY, currentX = 0, currentY = 0, initialTransform = '';
+            item.addEventListener('mousedown', dragStart); item.addEventListener('touchstart', dragStart, {passive: false});
             function dragStart(e) {
                 if(e.type === 'mousedown' && e.button !== 0) return; 
-
-                if (!initialTransform) {
-                    initialTransform = window.getComputedStyle(item).transform;
-                    if (initialTransform === 'none') initialTransform = '';
-                }
-
-                highestZIndex++;
-                item.style.zIndex = highestZIndex;
-                item.style.boxShadow = "0 20px 40px rgba(0,0,0,0.5)"; 
-                isDragging = true;
-
-                if (e.type === "touchstart") {
-                    startX = e.touches[0].clientX - currentX;
-                    startY = e.touches[0].clientY - currentY;
-                } else {
-                    startX = e.clientX - currentX;
-                    startY = e.clientY - currentY;
-                }
-
-                document.addEventListener('mousemove', drag);
-                document.addEventListener('touchmove', drag, {passive: false});
-                document.addEventListener('mouseup', dragEnd);
-                document.addEventListener('touchend', dragEnd);
+                if (!initialTransform) { initialTransform = window.getComputedStyle(item).transform; if (initialTransform === 'none') initialTransform = ''; }
+                highestZIndex++; item.style.zIndex = highestZIndex; item.style.boxShadow = "0 20px 40px rgba(0,0,0,0.5)"; isDragging = true;
+                if (e.type === "touchstart") { startX = e.touches[0].clientX - currentX; startY = e.touches[0].clientY - currentY; } 
+                else { startX = e.clientX - currentX; startY = e.clientY - currentY; }
+                document.addEventListener('mousemove', drag); document.addEventListener('touchmove', drag, {passive: false});
+                document.addEventListener('mouseup', dragEnd); document.addEventListener('touchend', dragEnd);
             }
-
             function drag(e) {
-                if (!isDragging) return;
-                e.preventDefault(); 
-
-                if (e.type === "touchmove") {
-                    currentX = e.touches[0].clientX - startX;
-                    currentY = e.touches[0].clientY - startY;
-                } else {
-                    currentX = e.clientX - startX;
-                    currentY = e.clientY - startY;
-                }
-
+                if (!isDragging) return; e.preventDefault(); 
+                if (e.type === "touchmove") { currentX = e.touches[0].clientX - startX; currentY = e.touches[0].clientY - startY; } 
+                else { currentX = e.clientX - startX; currentY = e.clientY - startY; }
                 item.style.transform = `${initialTransform} translate(${currentX}px, ${currentY}px) scale(1.1)`;
             }
-
             function dragEnd() {
-                if (!isDragging) return;
-                isDragging = false;
-                item.style.boxShadow = "2px 4px 10px rgba(0,0,0,0.3)"; 
+                if (!isDragging) return; isDragging = false; item.style.boxShadow = "2px 4px 10px rgba(0,0,0,0.3)"; 
                 item.style.transform = `${initialTransform} translate(${currentX}px, ${currentY}px) scale(1)`; 
-
-                document.removeEventListener('mousemove', drag);
-                document.removeEventListener('touchmove', drag);
-                document.removeEventListener('mouseup', dragEnd);
-                document.removeEventListener('touchend', dragEnd);
+                document.removeEventListener('mousemove', drag); document.removeEventListener('touchmove', drag);
+                document.removeEventListener('mouseup', dragEnd); document.removeEventListener('touchend', dragEnd);
             }
         });
     });
