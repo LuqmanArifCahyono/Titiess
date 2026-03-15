@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hadiah Spesial!</title>
+    <title>Ada Sesuatu Nih!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -27,6 +27,9 @@
             min-height: 100vh;
             overflow-x: hidden;
         }
+
+        /* Class untuk mengunci scroll saat preview foto terbuka */
+        .no-scroll { overflow: hidden !important; }
 
         .container {
             background: white;
@@ -91,12 +94,15 @@
             box-shadow: 2px 4px 10px rgba(0,0,0,0.3); display: inline-block; position: relative; cursor: grab; opacity: 0; transition: box-shadow 0.3s ease; touch-action: none; 
         }
         .polaroid-frame:active { cursor: grabbing; }
-        .polaroid-img { width: 100%; display: block; border-radius: 3px; pointer-events: none; }
+        
+        /* FIX: Menghapus pointer-events: none agar foto bisa diklik, tapi tambah anti-drag browser */
+        .polaroid-img { width: 100%; display: block; border-radius: 3px; cursor: zoom-in; -webkit-user-drag: none; }
+        
         .page.active .polaroid-frame { animation: fadeInDrop 0.6s ease-out forwards; }
         @keyframes fadeInDrop { 0% { opacity: 0; transform: translateY(-30px); } 100% { opacity: 1; transform: translateY(0); } }
 
         .photobooth-strip { background-color: white; padding: 10px; border-radius: 3px; box-shadow: 2px 2px 8px rgba(0,0,0,0.2); display: flex; flex-direction: column; gap: 5px; width: 130px; z-index: 5; }
-        .strip-photo { width: 100%; height: 110px; object-fit: cover; border: 1px solid #ddd; border-radius: 2px; }
+        .strip-photo { width: 100%; height: 110px; object-fit: cover; border: 1px solid #ddd; border-radius: 2px; cursor: zoom-in; -webkit-user-drag: none; }
 
         .frame1 { transform: rotate(-8deg); z-index: 10; animation-delay: 0.1s !important; }
         .frame2 { transform: rotate(5deg) translateY(-40px) translateX(15px); z-index: 11; animation-delay: 0.3s !important; }
@@ -104,6 +110,39 @@
         .frame4 { transform: rotate(7deg); z-index: 10; animation-delay: 0.2s !important; }
         .frame5 { transform: rotate(-6deg) translateY(-40px) translateX(-15px); z-index: 11; animation-delay: 0.4s !important; }
         .frame6 { transform: rotate(4deg) translateY(-85px) translateX(10px); z-index: 12; animation-delay: 0.6s !important; }
+
+        /* ========================================= */
+        /* CSS LIGHTBOX GALLERY (PREVIEW FOTO BLUR) */
+        /* ========================================= */
+        .lightbox-overlay { 
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; height: 100dvh; 
+            background: rgba(255, 230, 230, 0.4); /* Efek warna pink tipis */
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); /* Efek Blur */
+            z-index: 9999; display: none; justify-content: center; align-items: center; opacity: 0; 
+            transition: opacity 0.3s ease; 
+        }
+        .lightbox-overlay.active { display: flex; opacity: 1; }
+        
+        .lightbox-overlay img { 
+            max-width: 85%; max-height: 85%; border-radius: 10px; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25); object-fit: contain; 
+            animation: zoomInPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: opacity 0.3s ease-in-out; opacity: 1; 
+        }
+        
+        @keyframes zoomInPop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .lb-btn { 
+            position: absolute; background: #ff6b81; border: none; color: white; 
+            width: 45px; height: 45px; border-radius: 50%; font-size: 20px; 
+            cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; z-index: 60; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin: 0; padding: 0;
+        }
+        .lb-btn:hover { background: #ff4757; transform: scale(1.1); }
+        .lb-close { top: 20px; right: 20px; }
+        .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+        .lb-prev:hover, .lb-next:hover { transform: translateY(-50%) scale(1.1); }
 
         /* ========================================= */
         /* CSS VIRTUAL FLOWERS */
@@ -126,7 +165,7 @@
         .letter-paper { background-color: #fffaf0; background-image: repeating-linear-gradient(transparent, transparent 28px, #ffb8b8 28px, #ffb8b8 29px); padding: 45px 30px 30px 30px; border-radius: 3px; box-shadow: 2px 5px 15px rgba(0,0,0,0.15); text-align: left; font-family: 'Poppins', sans-serif; font-size: 14px; line-height: 29px; color: #2c3e50; position: relative; white-space: pre-wrap; }
 
         /* ========================================= */
-        /* CSS LOVE COUPONS (DESAIN ORIGINAL) */
+        /* CSS LOVE COUPONS */
         /* ========================================= */
         .coupon-container { display: flex; flex-direction: column; gap: 20px; margin: 30px 0; align-items: center; overflow: visible; }
         .coupon {
@@ -145,13 +184,13 @@
         .vertical-text { writing-mode: vertical-rl; transform: rotate(180deg); font-size: 11px; letter-spacing: 2px; font-weight: 600; color: #d15c5c; }
         .c-mid { flex: 1; padding: 20px 10px; text-align: center; border-right: 2px dashed #b33939; display: flex; flex-direction: column; justify-content: center; }
         .c-mid p { margin: 0; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; }
-        .c-mid h3 { margin: 5px 0; font-size: 26px; letter-spacing: 1px; color: #b33939; font-weight: 700; }
+        .c-mid h3 { margin: 5px 0; font-size: 24px; letter-spacing: 1px; color: #b33939; font-weight: 700; }
         
         .c-right { padding: 10px; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .barcode { width: 25px; height: 60px; background: repeating-linear-gradient(90deg, #b33939, #b33939 2px, transparent 2px, transparent 4px, #b33939 4px, #b33939 5px, transparent 5px, transparent 8px); }
 
         /* ========================================= */
-        /* EFEK ANIMASI KEBELAH JADI 2 (TERBARU & FIX) */
+        /* EFEK ANIMASI KEBELAH JADI 2 */
         /* ========================================= */
         .coupon.redeemed {
             background-color: #f1f2f6 !important; 
@@ -161,10 +200,8 @@
             overflow: visible !important;
         }
         
-        /* HANYA sembunyikan inner UTAMA yang asli, agar potongan belahannya tetap kelihatan */
         .coupon.redeemed > .coupon-inner { opacity: 0 !important; }
 
-        /* Potongan Kiri melayang ke kiri */
         .fly-left {
             position: absolute !important; top: 0; left: 0; width: 100%; height: 100%;
             -webkit-clip-path: polygon(0 0, 55% 0, 45% 100%, 0 100%);
@@ -175,7 +212,6 @@
         }
         .fly-left.alt { background-color: #fadcdc; }
 
-        /* Potongan Kanan melayang ke kanan */
         .fly-right {
             position: absolute !important; top: 0; left: 0; width: 100%; height: 100%;
             -webkit-clip-path: polygon(55% 0, 100% 0, 100% 100%, 45% 100%);
@@ -186,20 +222,11 @@
         }
         .fly-right.alt { background-color: #fadcdc; }
 
-        /* Pastikan isi dari potongan yang terbang tetap terlihat! */
         .fly-left > .coupon-inner, .fly-right > .coupon-inner { opacity: 1 !important; }
 
-        @keyframes tearLeft {
-            0% { transform: translate(0, 0) rotate(0); opacity: 1; }
-            100% { transform: translate(-60px, 80px) rotate(-15deg); opacity: 0; }
-        }
+        @keyframes tearLeft { 0% { transform: translate(0, 0) rotate(0); opacity: 1; } 100% { transform: translate(-60px, 80px) rotate(-15deg); opacity: 0; } }
+        @keyframes tearRight { 0% { transform: translate(0, 0) rotate(0); opacity: 1; } 100% { transform: translate(60px, 80px) rotate(15deg); opacity: 0; } }
 
-        @keyframes tearRight {
-            0% { transform: translate(0, 0) rotate(0); opacity: 1; }
-            100% { transform: translate(60px, 80px) rotate(15deg); opacity: 0; }
-        }
-
-        /* Stempel 'Terklaim' yang tertinggal di bawahnya */
         .claimed-stamp {
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.5);
             font-size: 26px; font-weight: 800; color: #ff6b81; opacity: 0; z-index: 1; pointer-events: none;
@@ -207,9 +234,7 @@
             animation: stampAppear 0.5s 0.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes stampAppear {
-            to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
+        @keyframes stampAppear { to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
 
         /* ========================================= */
         /* 📱 RESPONSIVE DESIGN (UNTUK HP / TABLET) */
@@ -245,24 +270,25 @@
 <div class="container">
     <div id="page1" class="page active">
         <img src="gif kucing.gif" alt="Kucing Menyapa" style="width: 120px; margin-bottom: 10px;">
-        <h1>haloo titiess</h1>
-        <h3>mau lihat hadiah kamu nggakk?</h3>
+        <h1>Haloo Titiess!</h1>
+        <h3>ada project iseng nih, mau nyoba liat ngga? <i class="fa-regular fa-eye"></i></h3>
         <div style="margin-top: 30px;">
-            <button onclick="goToPage('page2')">mau liatt</button>
-            <button class="btn-outline" onclick="goToPage('page-rejection')">ngga dulu deh</button>
+            <button onclick="goToPage('page2')">Boleh dehh</button>
+            <button class="btn-outline" onclick="goToPage('page-rejection')">Ntar aja</button>
         </div>
     </div>
 
     <div id="page-rejection" class="page">
         <img src="kucing 2.gif" alt="Kucing Sedih" style="width: 120px; margin-bottom: 10px;">
-        <h1>i promise u will like it <i class="fa-regular fa-face-frown-open"></i></h1>
+        <h1>Yahh padahal lucu loh <i class="fa-regular fa-face-frown-open"></i></h1>
+        <h3>coba liat bentar ajaa wkwk</h3>
         <br>
         <button onclick="goToPage('page1')">Return</button>
     </div>
 
     <div id="page2" class="page">
-        <h1>ini hadiahnyaa</h1>
-        <h3>semoga kamu suka dan sehat selalu yaaa</h3>
+        <h1>Welcome! 🎉</h1>
+        <h3>Pilih menunya bebas, coba diklik-klik ajaa</h3>
         <div class="grid-container">
             <div class="card" onclick="goToPage('card1-page')"><img src="logo galeri.jpg" alt="Memories" class="card-img"></div>
             <div class="card" onclick="goToPage('card2-page')"><img src="logo bunga.jpg" alt="Flowers" class="card-img"></div>
@@ -272,8 +298,8 @@
     </div>
 
     <div id="card1-page" class="page">
-        <h2>Captures Memories</h2>
-        <p>dan semua kenangan manis kita... hehe <br><small>(Coba geser-geser fotonya!)</small></p>
+        <h2>Moments ✨</h2>
+        <p>Beberapa momen random yang sempet ke-capture hehe <br><small>(fotonya bisa digeser kokk)</small></p>
         <div class="collage-container">
             <div class="collage-column left-collage">
                 <div class="polaroid-frame frame1"><img src="fotbar bunga.jpeg" alt="Memory" class="polaroid-img"></div>
@@ -314,100 +340,102 @@
     </div>
 
     <div id="card2-page" class="page">
-        <h2>Captures Virtual Flowers</h2>
+        <h2>Virtual Flowers 🌷</h2>
         <div class="flower-container">
             <div class="chat-column">
-                <div class="bubble left">Hai!</div>
-                <div class="bubble right">Ini bunga buatmu</div>
-                <div class="bubble left">Cantik kan?</div>
-                <div class="bubble right">Sama kaya kamu</div>
-                <div class="bubble left">Hehehe</div>
+                <div class="bubble left"> AKU NITIP PAKET DI KOS MU BOLE NGGAAA</div>
+                <div class="bubble right">gabole ibukos</div>
+                <div class="bubble left">barange udah ditangann kek nitip dulu</div>
+                <div class="bubble right">oww,bisa si</div>
+                <div class="bubble left">besok kubawa ya</div>
             </div>
-            <div class="flower-card"><img src="bunga.jpeg" alt="Flower" class="flower-img"><p>For you <i class="fa-solid fa-spa" style="color:#ffb8b8;"></i></p></div>
+            <div class="flower-card"><img src="bunga2.jpeg" alt="Flower" class="flower-img"><p>For you <i class="fa-solid fa-spa" style="color:#ffb8b8;"></i></p></div>
             <div class="chat-column">
-                <div class="bubble right">Semoga harimu...</div>
-                <div class="bubble left">Selalu...</div>
-                <div class="bubble right">Menyenangkan!</div>
-                <div class="bubble left">Semangat terus!</div>
-                <div class="bubble right"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                <div class="bubble right">besok?</div>
+                <div class="bubble left">iya besokk</div>
+                <div class="bubble right"> makasi yawww buat bunga ama coklatnya</div>
+                <div class="bubble left"> kalo keliatan mo layu buat mandi aja itu</div>
+                <div class="bubble right"> tutor ketempelan jurik</i></div>
             </div>
         </div>
         <button onclick="goToPage('page2')">Return</button>
     </div>
 
     <div id="card3-page" class="page">
-        <h2>ini lagu yang bikin aku inget sama kamuu</h2>
+        <h2>Coba dengerin deh 🎵</h2>
+        <p style="color: #747d8c; margin-bottom: 20px;">Lagu yang vibes-nya asik banget buat nemenin nugas nirmanamuu.</p>
         <div style="margin: 30px auto; max-width: 300px; text-align: center;">
             <a href="https://youtu.be/iygXgP2nOF4?si=4LNdD9qsFbOHRo_F" target="_blank" style="text-decoration: none; color: inherit; display: block;">
                 <img src="NIKI2.jpg" alt="Cover Lagu" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 <h3 style="margin-top: 15px;">Take A Chance With Me - NIKI</h3>
-                <p style="font-size: 14px; color: #ff6b81; font-weight: bold;">(Fotonya bisa di pencet kokk)</p>
+                <p style="font-size: 14px; color: #ff6b81; font-weight: bold;">(Fotonya bisa diklik kok)</p>
             </a>
         </div>
         <button onclick="goToPage('page2')">Return</button>
     </div>
 
     <div id="card4-page" class="page">
-        <h2>A Letter for You <i class="fa-solid fa-envelope-open-text" style="color:#ff6b81;"></i></h2>
+        <h2>Sedikit Pesan <i class="fa-solid fa-envelope-open-text" style="color:#ff6b81; margin-left: 5px;"></i></h2>
         <div class="letter-wrapper">
             <div class="washi-tape"></div>
             <div class="letter-paper">
 Halo Titiess,
+Selamat ulang tahun yaa! 🎉
 
-Aku pernah percaya seseorang bisa datang begitu saja, tanpa rencana, lalu pelan-pelan mengubah cara kita memandang hidup. Dan aku menemukan keyakinan itu lewat dirimu.
+Mungkin hadiah web ini agak random, tapi aku emang pengen ngasih ucapan dengan cara yang anak "informatics" banget wkwk. 
 
-Terima kasih sudah hadir di momen-momen sederhana, bahkan ketika aku merasa tidak bisa berbuat apa-apa. Di saat aku kebingungan, ragu, dan merasa kecil, kamu muncul dengan caramu berpikir yang begitu kreatif dan berbeda dariku. Dari tugas yang awalnya terasa berat, aku justru menemukan kekaguman: pada caramu melihat, mencipta, dan menghidupkan sesuatu yang tak pernah bisa kulakukan sendiri.
+Jujur, Aku yang terbiasa mikir kaku pakai logika, selalu kagum tiap ngeliat caramu yang penuh imajinasi dan sekreatif itu. Waktu kita ngerjain tugas bareng, ngeliat caramu nyelesaiin sesuatu tuh bikin aku sadar, ternyata kamu tuh sekeren itu waktu gambar daiatas kertas.
 
-Aku belajar bahwa perbedaan bukan jarak. Aku yang terbiasa berpikir dengan logika, dan kamu yang hidup dengan imajinasi—ternyata bisa saling melengkapi.
+Makasih ya udah mau temenan sama diriku. Di umur yang baru ini, semoga kamu selalu dikelilingi hal-hal baik, makin lancar semua urusannya, dan semoga senyummu nggak pernah kehilangan alasannya.
 
-Terima kasih sudah mau berkenalan denganku, sudah berteman, dan sudah menjadi bagian kecil namun berarti dalam hidupku. Semoga kamu selalu sehat, dan semoga senyummu tak pernah kehilangan alasannya.
+Kalo suatu saat nanti kamu butuh bantuan, temen jalan, atau sekadar temen ngobrol, info ajaa nanti kalo kita free langsung gass.
 
-Take A Chance With Me Someday, I'll be here.
+Sekali lagi, Happy Birthday Titiess! Semoga suka sama hadiah kecil ini yaa, kalau ada waktu mungkin kita bisa menuangkan pikiran kita lewat lukisanmu dan pemikiran informatics yang ku punya menjadi sesuatu yang bernilai atau berharga.
 
 Yours Truly,
 Luqman
             </div>
         </div>
         <div style="margin-top: 30px;">
-            <p style="font-weight: bold; color: #ff6b81; margin-bottom: 15px;">udah dibaca semua hadiahnya?</p>
+            <p style="font-weight: bold; color: #ff6b81; margin-bottom: 15px;">Kalo udah dibaca, lanjut yuk!</p>
             <button class="btn-outline" onclick="goToPage('page2')">Return</button>
-            <button onclick="goToPage('coupon-selection-page')">Next</button>
+            <button onclick="goToPage('coupon-selection-page')">Next <i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 
     <div id="coupon-selection-page" class="page">
-        <h1 style="margin-bottom: 5px;">Love Coupons <i class="fa-solid fa-ticket" style="color:#ff4757;"></i></h1>
-        <p style="color: #747d8c; margin-bottom: 30px;">Pilih tiket yang mau kamu klaim hari ini! Bisa pilih lebih dari satu lho.</p>
+        <h1 style="margin-bottom: 5px;">Special Vouchers <i class="fa-solid fa-ticket" style="color:#ff4757;"></i></h1>
+        <p style="color: #747d8c; margin-bottom: 30px;">Nah, sebagai apresiasi, aku punya beberapa voucher traktiran nih. Bebas pilih yang mana aja!</p>
         
         <div class="coupon-container" id="selection-container">
             <div class="coupon" onclick="toggleCoupon(this)">
                 <div class="coupon-inner">
-                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
-                    <div class="c-mid"><p>GOOD FOR</p><h3>PICNIC DATE</h3><p>Grab a blanket</p></div>
+                    <div class="c-left"><span class="vertical-text">VIP VOUCHER</span></div>
+                    <div class="c-mid"><p>VOUCHER FOR</p><h3>ICE CREAM</h3><p>Bebas pilih rasa kesukaanmu!</p></div>
                     <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
                 </div>
             </div>
 
             <div class="coupon alt" onclick="toggleCoupon(this)">
                 <div class="coupon-inner">
-                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
-                    <div class="c-mid"><p>GOOD FOR</p><h3>ICE CREAM</h3><p>Where do you want to go?</p></div>
+                    <div class="c-left"><span class="vertical-text">VIP VOUCHER</span></div>
+                    <div class="c-mid"><p>VOUCHER FOR</p><h3>MOVIE</h3><p>Pilih film yang lagi pengen ditonton</p></div>
                     <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
                 </div>
             </div>
 
             <div class="coupon" onclick="toggleCoupon(this)">
                 <div class="coupon-inner">
-                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
-                    <div class="c-mid"><p>GOOD FOR</p><h3>MOVIE NIGHT</h3><p>You pick the movie</p></div>
+                    <div class="c-left"><span class="vertical-text">VIP VOUCHER</span></div>
+                    <div class="c-mid"><p>VOUCHER FOR</p><h3>CITYLIGHT RIDE</h3><p>Jalan santai nikmatin suasana malam</p></div>
                     <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
                 </div>
             </div>
 
             <div class="coupon alt" onclick="toggleCoupon(this)">
                 <div class="coupon-inner">
-                    <div class="c-left"><span class="vertical-text">LOVE COUPON</span></div>
-                    <div class="c-mid"><p>GOOD FOR</p><h3>GAME NIGHT</h3><p>Anything you want to play</p></div>
+                    <div class="c-left"><span class="vertical-text">VIP VOUCHER</span></div>
+                    <div class="c-mid"><p>VOUCHER FOR</p><h3>TIMEZONE</h3><p>Seru-seruan bareng di Timezone!</p></div>
                     <div class="c-right"><div class="barcode"></div><span class="vertical-text">NO EXPIRE</span></div>
                 </div>
             </div>
@@ -415,39 +443,46 @@ Luqman
 
         <div style="margin-top: 40px;">
             <button class="btn-outline" onclick="goToPage('card4-page')">Back to Letter</button>
-            <button onclick="submitCoupons()">Klaim Tiket!</button>
+            <button onclick="submitCoupons()">Ambil Voucher!</button>
         </div>
     </div>
 
     <div id="redemption-page" class="page">
-        <h1 style="margin-bottom: 5px;">Waktunya Eksekusi! <i class="fa-solid fa-rocket" style="color:#eccc68;"></i></h1>
-        <p style="color: #747d8c; margin-bottom: 30px;">Klik tiketnya kalau kita udah nyelesaiin kegiatannya ya!</p>
+        <h1 style="margin-bottom: 5px;">Voucher Tersimpan! <i class="fa-solid fa-box-open" style="color:#eccc68;"></i></h1>
+        <p style="color: #747d8c; margin-bottom: 30px;">Nanti kalau mau dipake, tinggal tagih ke aku trus klik tiketnya ya!</p>
         
         <div class="coupon-container" id="redeem-container"></div>
 
         <div style="margin-top: 40px; text-align: center;">
-            <p id="redeem-msg" style="color: #ff6b81; font-weight: bold;">Robek (klik) semua tiket di atas dulu buat lanjut! <i class="fa-solid fa-eye"></i></p>
+            <p id="redeem-msg" style="color: #ff6b81; font-weight: bold;">(Coba klik tiketnya buat simulasi robek) <i class="fa-solid fa-hand-pointer"></i></p>
             
-            <button id="btn-finish" style="display: none;" onclick="goToPage('reward-page')">Lanjut Buka Kejutan! <i class="fa-solid fa-gift"></i></button>
+            <button id="btn-finish" style="display: none;" onclick="goToPage('reward-page')">Cek Bonusnya! <i class="fa-solid fa-gift"></i></button>
         </div>
     </div>
 
     <div id="reward-page" class="page">
         <img src="gif kucing.gif" alt="Surprise" style="width: 120px; margin-bottom: 10px;">
-        <h1 style="margin-bottom: 5px;">Kejutan Tambahan! <i class="fa-solid fa-gift" style="color:#ff6b81;"></i></h1>
-        <p style="color: #747d8c; margin-bottom: 30px;">Karena kamu udah nyelesaiin tiketnya...</p>
+        <h1 style="margin-bottom: 5px;">Sip, Noted! <i class="fa-solid fa-check-double" style="color:#ff6b81;"></i></h1>
+        <p style="color: #747d8c; margin-bottom: 30px;">Pilihan vouchermu udah aku catet nih.</p>
         
-        <div id="reward-message" style="background: #fff0f5; border: 2px dashed #ffb8b8; padding: 25px; border-radius: 10px; margin-bottom: 30px; color: #b33939; font-size: 16px; line-height: 1.6; font-weight: bold;"></div>
+        <div id="reward-message" style="display: none; background: #fff0f5; border: 2px dashed #ffb8b8; padding: 25px; border-radius: 10px; margin-bottom: 30px; color: #b33939; font-size: 16px; line-height: 1.6; font-weight: bold;"></div>
         
-        <button onclick="goToPage('page-end')">Terakhir Nih!</button>
+        <button onclick="goToPage('page-end')">Selesai!</button>
     </div>
 
     <div id="page-end" class="page">
-        <h1 style="font-size: 2.5em; margin-top: 50px;">makasih ya udah buka semua hadiahnyaaa <i class="fa-solid fa-champagne-glasses" style="color:#eccc68;"></i></h1>
+        <h1 style="font-size: 2.5em; margin-top: 50px;">Makasih udah mampir liat project ini! <i class="fa-solid fa-hands-clapping" style="color:#eccc68;"></i></h1>
         <br>
         <button class="btn-outline" onclick="goToPage('page2')">Kembali ke Menu</button>
     </div>
 
+</div>
+
+<div id="photo-lightbox" class="lightbox-overlay">
+    <button class="lb-btn lb-close" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+    <button class="lb-btn lb-prev" onclick="changePhoto(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+    <img id="lb-img" src="" alt="Zoomed Photo">
+    <button class="lb-btn lb-next" onclick="changePhoto(1)"><i class="fa-solid fa-chevron-right"></i></button>
 </div>
 
 <script>
@@ -459,9 +494,115 @@ Luqman
         window.scrollTo(0, 0); 
     }
 
-    let selectedCount = 0; 
+    // ==========================================
+    // FUNGSI LIGHTBOX GALLERY (PREVIEW FOTO)
+    // ==========================================
+    let currentPhotoIndex = 0;
+    let photosArray = [];
+    let isTransitioning = false; 
+    let wasDragged = false; // Variabel pinter buat ngecek apakah foto cuma di-klik atau lagi di-drag
 
-    // --- Lojik Kupon Interaktif ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Ambil semua gambar di halaman Memories
+        const photoElements = document.querySelectorAll('#card1-page .polaroid-img, #card1-page .strip-photo');
+        
+        photoElements.forEach((img, index) => {
+            photosArray.push(img.src);
+            
+            // Pasang fungsi klik di gambar
+            img.addEventListener('click', (e) => {
+                if (wasDragged) return; // Kalo abis digeser, jangan buka previewnya (anti-tabrakan)
+                openLightbox(index);
+            });
+        });
+
+        // LOJIK DRAG & DROP YANG SUDAH DIPERBARUI
+        const dragItems = document.querySelectorAll('.polaroid-frame');
+        let highestZIndex = 50; 
+        dragItems.forEach(item => {
+            let isDragging = false, startX, startY, currentX = 0, currentY = 0, initialTransform = '';
+            item.addEventListener('mousedown', dragStart); item.addEventListener('touchstart', dragStart, {passive: false});
+            
+            function dragStart(e) {
+                if(e.type === 'mousedown' && e.button !== 0) return; 
+                wasDragged = false; // Reset status drag waktu pertama disentuh
+                
+                if (!initialTransform) { initialTransform = window.getComputedStyle(item).transform; if (initialTransform === 'none') initialTransform = ''; }
+                highestZIndex++; item.style.zIndex = highestZIndex; item.style.boxShadow = "0 20px 40px rgba(0,0,0,0.5)"; isDragging = true;
+                if (e.type === "touchstart") { startX = e.touches[0].clientX - currentX; startY = e.touches[0].clientY - currentY; } 
+                else { startX = e.clientX - currentX; startY = e.clientY - currentY; }
+                
+                document.addEventListener('mousemove', drag); document.addEventListener('touchmove', drag, {passive: false});
+                document.addEventListener('mouseup', dragEnd); document.addEventListener('touchend', dragEnd);
+            }
+            
+            function drag(e) {
+                if (!isDragging) return; e.preventDefault(); 
+                wasDragged = true; // Kalo mouse bergerak, tandai sebagai "drag" biar nggak kepencet preview
+                
+                if (e.type === "touchmove") { currentX = e.touches[0].clientX - startX; currentY = e.touches[0].clientY - startY; } 
+                else { currentX = e.clientX - startX; currentY = e.clientY - startY; }
+                item.style.transform = `${initialTransform} translate(${currentX}px, ${currentY}px) scale(1.1)`;
+            }
+            
+            function dragEnd() {
+                if (!isDragging) return; isDragging = false; item.style.boxShadow = "2px 4px 10px rgba(0,0,0,0.3)"; 
+                item.style.transform = `${initialTransform} translate(${currentX}px, ${currentY}px) scale(1)`; 
+                
+                document.removeEventListener('mousemove', drag); document.removeEventListener('touchmove', drag);
+                document.removeEventListener('mouseup', dragEnd); document.removeEventListener('touchend', dragEnd);
+                
+                // Kasih jeda dikit sebelum reset biar event kliknya sempet keblokir
+                setTimeout(() => wasDragged = false, 100);
+            }
+        });
+    });
+
+    function openLightbox(index) {
+        currentPhotoIndex = index;
+        const lbImg = document.getElementById('lb-img');
+        lbImg.style.opacity = 1;
+        lbImg.src = photosArray[currentPhotoIndex];
+        
+        document.getElementById('photo-lightbox').classList.add('active');
+        document.body.classList.add('no-scroll'); // Ngunci scroll layar
+    }
+
+    function closeLightbox() {
+        document.getElementById('photo-lightbox').classList.remove('active');
+        document.body.classList.remove('no-scroll'); // Buka kunci scroll
+    }
+
+    function changePhoto(direction) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const lbImg = document.getElementById('lb-img');
+        lbImg.style.opacity = 0; // Fade out gambar lama
+
+        currentPhotoIndex += direction;
+        if (currentPhotoIndex < 0) { currentPhotoIndex = photosArray.length - 1; } 
+        else if (currentPhotoIndex >= photosArray.length) { currentPhotoIndex = 0; }
+
+        setTimeout(() => {
+            lbImg.src = photosArray[currentPhotoIndex];
+            lbImg.onload = function() {
+                lbImg.style.opacity = 1; // Fade in gambar baru
+                isTransitioning = false;
+            };
+            if (lbImg.complete) {
+                lbImg.style.opacity = 1;
+                isTransitioning = false;
+            }
+        }, 300);
+    }
+
+    // ==========================================
+    // FUNGSI VOUCHER / KUPON
+    // ==========================================
+    let selectedCount = 0; 
+    let selectedVoucherNames = []; 
+
     function toggleCoupon(element) {
         element.classList.toggle('selected');
     }
@@ -471,28 +612,33 @@ Luqman
         selectedCount = selectedCoupons.length; 
         
         if (selectedCount === 0) {
-            alert('Pilih minimal satu tiket dulu dong buat diklaim! (T_T)');
+            alert('Pilih minimal satu voucher dulu dong! hehe 🙏');
             return;
         }
+
+        selectedVoucherNames = [];
+        selectedCoupons.forEach(coupon => {
+            let title = coupon.querySelector('.c-mid h3').innerText.toLowerCase();
+            selectedVoucherNames.push(title);
+        });
 
         const redeemContainer = document.getElementById('redeem-container');
         redeemContainer.innerHTML = ''; 
         
         document.getElementById('btn-finish').style.display = 'none';
         document.getElementById('redeem-msg').style.display = 'block';
+        document.getElementById('reward-message').style.display = 'none';
 
         selectedCoupons.forEach(coupon => {
             let clone = coupon.cloneNode(true); 
             clone.classList.remove('selected'); 
             clone.removeAttribute('onclick');   
             
-            // FUNGSI KETIKA TIKET DIKLIK DI HALAMAN EKSEKUSI (EFEK SOBEK FIX)
             clone.onclick = function() {
                 if(!this.classList.contains('redeemed')) {
                     
                     let isAlt = this.classList.contains('alt');
                     
-                    // Kita gunakan innerHTML dari clone ini untuk mengisi potongan kiri dan kanan
                     let leftPart = document.createElement('div');
                     leftPart.className = 'coupon fly-left' + (isAlt ? ' alt' : '');
                     leftPart.innerHTML = this.innerHTML; 
@@ -503,15 +649,12 @@ Luqman
 
                     let stamp = document.createElement('div');
                     stamp.className = 'claimed-stamp';
-                    // Teks stempel dirubah pakai icon FontAwesome
                     stamp.innerHTML = 'TERKLAIM <i class="fa-solid fa-circle-check"></i>';
 
-                    // Masukkan potongan terbang dan stempel ke tiket utama
                     this.appendChild(leftPart);
                     this.appendChild(rightPart);
                     this.appendChild(stamp);
 
-                    // Tandai tiket UTAMA sebagai selesai
                     this.classList.add('redeemed'); 
                     checkAllRedeemed(); 
                 }
@@ -524,60 +667,41 @@ Luqman
     }
 
     function checkAllRedeemed() {
-        // PERBAIKAN: Gunakan tanda '>' agar Javascript HANYA menghitung tiket yang ada di luar (tiket utama), 
-        // BUKAN tiket potongan yang baru saja kita gandakan di dalam untuk efek terbang.
         const total = document.querySelectorAll('#redeem-container > .coupon').length;
         const redeemed = document.querySelectorAll('#redeem-container > .coupon.redeemed').length;
         
         if(total > 0 && total === redeemed) {
-            // Tampilkan tombol Lanjut Buka Kejutan
             document.getElementById('btn-finish').style.display = 'inline-block';
             document.getElementById('redeem-msg').style.display = 'none';
 
-            // Siapkan teks di halaman Reward
-            const rewardEl = document.getElementById('reward-message');
-            if (selectedCount === 1) {
-                rewardEl.innerHTML = "Wah ambil 1 doang nih? Tumben ga maruk wkwk.<br><br>Yaudah dapet bonus <b>1x peluk ekstra</b> deh! <i class='fa-regular fa-face-smile-beam'></i>";
-            } else if (selectedCount === 2) {
-                rewardEl.innerHTML = "Pilih 2 pas banget buat habisin weekend bareng!<br><br>Bonusnya dapet <b>traktiran makanan kesukaanmu!</b> <i class='fa-solid fa-burger'></i>";
-            } else if (selectedCount === 3) {
-                rewardEl.innerHTML = "Wuih borong 3 tiket! Siap-siap aku capek nemenin kamu seharian yaa <i class='fa-solid fa-face-laugh-squint'></i>.<br><br>Bonusnya aku bakal <b>nurutin 1 permintaan bebas</b> kamu!";
-            } else if (selectedCount === 4) {
-                rewardEl.innerHTML = "MARUK ALERT <i class='fa-solid fa-triangle-exclamation' style='color:red;'></i>! Diborong semua dong ahaha.<br><br>Gapapa khusus buat kamu, dapet VIP Pass: <b>Bebas manja seharian full!</b> <i class='fa-solid fa-heart' style='color:#ff4757;'></i>";
+            let formattedNames = "";
+            let namesCopy = [...selectedVoucherNames];
+            
+            if (namesCopy.length === 1) {
+                formattedNames = namesCopy[0];
+            } else if (namesCopy.length === 2) {
+                formattedNames = namesCopy.join(" sama ");
+            } else {
+                let last = namesCopy.pop();
+                formattedNames = namesCopy.join(", ") + ", sama " + last;
             }
+
+            let baseMsg = "";
+            if (selectedCount === 1) {
+                baseMsg = "<i class='fa-solid fa-note-sticky' style='color: #ff6b81;'></i> Pesan Tambahan:<br><br>Wah ngambil 1 doang? Tumben baik 😂.<br>Oke deal, vouchernya siap dieksekusi kapanpun kamu mau (asal waktunya pas aja ya) <i class='fa-regular fa-face-smile-beam'></i>";
+            } else if (selectedCount === 2) {
+                baseMsg = "<i class='fa-solid fa-note-sticky' style='color: #ff6b81;'></i> Pesan Tambahan:<br><br>Dua voucher diamankan! Lumayan lah ya buat ngisi waktu luang nanti.<br>Kasih tau aja kapan mau dipake ya! <i class='fa-solid fa-mug-hot'></i>✨";
+            } else if (selectedCount === 3) {
+                baseMsg = "<i class='fa-solid fa-note-sticky' style='color: #ff6b81;'></i> Pesan Tambahan:<br><br>Wuih borong 3 nih? Siap-siap aku bangkrut dikit ya 😂.<br>Kapan-kapan kita realisasikan pelan-pelan yak! <i class='fa-solid fa-face-laugh-squint'></i>";
+            } else if (selectedCount === 4) {
+                baseMsg = "<i class='fa-solid fa-triangle-exclamation' style='color: #ff4757;'></i> MARUK ALERT!<br><br>Diborong semua dong ahaha. Yaudah khusus buat kamu gapapa deh.<br>Santai aja ntar kita atur waktunya kapan-kapan! <i class='fa-solid fa-popcorn'></i>🍿";
+            }
+            
+            const rewardEl = document.getElementById('reward-message');
+            rewardEl.innerHTML = baseMsg + "<br><br><span style='color: #ff4757;'><b>Okee tadi kamu milih " + formattedNames + " ya? Jangan lupa di-screenshot layarnya yaa buat bukti nagih ke aku! 📸</b></span>";
+            rewardEl.style.display = 'block';
         }
     }
-
-    // --- Lojik Drag & Drop Memories ---
-    document.addEventListener('DOMContentLoaded', () => {
-        const dragItems = document.querySelectorAll('.polaroid-frame');
-        let highestZIndex = 50; 
-        dragItems.forEach(item => {
-            let isDragging = false, startX, startY, currentX = 0, currentY = 0, initialTransform = '';
-            item.addEventListener('mousedown', dragStart); item.addEventListener('touchstart', dragStart, {passive: false});
-            function dragStart(e) {
-                if(e.type === 'mousedown' && e.button !== 0) return; 
-                if (!initialTransform) { initialTransform = window.getComputedStyle(item).transform; if (initialTransform === 'none') initialTransform = ''; }
-                highestZIndex++; item.style.zIndex = highestZIndex; item.style.boxShadow = "0 20px 40px rgba(0,0,0,0.5)"; isDragging = true;
-                if (e.type === "touchstart") { startX = e.touches[0].clientX - currentX; startY = e.touches[0].clientY - currentY; } 
-                else { startX = e.clientX - currentX; startY = e.clientY - currentY; }
-                document.addEventListener('mousemove', drag); document.addEventListener('touchmove', drag, {passive: false});
-                document.addEventListener('mouseup', dragEnd); document.addEventListener('touchend', dragEnd);
-            }
-            function drag(e) {
-                if (!isDragging) return; e.preventDefault(); 
-                if (e.type === "touchmove") { currentX = e.touches[0].clientX - startX; currentY = e.touches[0].clientY - startY; } 
-                else { currentX = e.clientX - startX; currentY = e.clientY - startY; }
-                item.style.transform = `${initialTransform} translate(${currentX}px, ${currentY}px) scale(1.1)`;
-            }
-            function dragEnd() {
-                if (!isDragging) return; isDragging = false; item.style.boxShadow = "2px 4px 10px rgba(0,0,0,0.3)"; 
-                item.style.transform = `${initialTransform} translate(${currentX}px, ${currentY}px) scale(1)`; 
-                document.removeEventListener('mousemove', drag); document.removeEventListener('touchmove', drag);
-                document.removeEventListener('mouseup', dragEnd); document.removeEventListener('touchend', dragEnd);
-            }
-        });
-    });
 </script>
 
 </body>
